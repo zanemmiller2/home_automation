@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible"
       content="ie=edge" />
-    <title>My Website</title>
+    <title>Containerized Home Assistant and Portainer</title>
     <link rel="stylesheet"
       href="/css/style.css" />
     <link rel="icon"
@@ -20,7 +20,6 @@
       <h1>Home Automation With Docker on Linux Setup</h1>
     </main>
     <script src="index.js"></script>
-  </body>
   <!-- Assigning a static IP to linux computer section -->
   <h2>1. Assign static IP address to Linux computer</h2>
   <ol type="1">
@@ -185,7 +184,7 @@
       We can now navigate to the Portainer UI:
       <pre>
         <code class="language-url">
-          http://&ltIPADDRESS&gt:9000/       
+          https://&ltIPADDRESS&gt:9000/
         </code>
       </pre>
     </li>
@@ -266,7 +265,7 @@
               panel_iframe:
                 portainer:
                   title: "Portainer"
-                  url: "http://&ltYOUR.IP.ADDRESS&gt9000/#/containers"
+                  url: "https://&ltYOUR.IP.ADDRESS&gt9000/#/containers"
                   icon: mdi:docker
                   require_admin: true     
             </code>
@@ -289,4 +288,5 @@
     <img src="/images/portainer_in_home_assistant.png" class="padding">
   </ol>
   <!-- Managing Your Docker Containers From within Home Assistant /-->
+  </body>
 </html>
