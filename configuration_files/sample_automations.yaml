@@ -1,0 +1,37 @@
+- id: '1680727006354'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.samsung_8_series_55
+    from: 'off'
+  condition:
+  - condition: state
+    entity_id: light.living_room
+    state: 'on'
+  action:
+  - service: scene.turn_on
+    data:
+      transition: 0
+    target:
+      entity_id: scene.living_room_relax
+  mode: single
+- id: '1680728177589'
+  alias: Auto Resplendent
+  description: Turns Living Room lights to resplendent automatically at 9pm if the
+    tv is on
+  trigger:
+  - platform: time
+    at: '21:00:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: media_player.samsung_8_series_55
+      state: 'On'
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.living_room_resplendent
+    metadata: {}
+  mode: single
