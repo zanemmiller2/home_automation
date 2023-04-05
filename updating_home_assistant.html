@@ -1,15 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Keeping Home Assistant Container Up To Date</title>
-</head>
-<body>
-<main>
-      <h1>Home Automation With Docker on Linux Setup</h1>
-    </main>
+    <head>
+        <meta charset="UTF-8">
+        <title>Keeping Home Assistant Container Up To Date</title>
+    </head>
+    <body>
+        <main>
+            <h1>Home Automation With Docker on Linux Setup</h1>
+        </main>
 
+        <!-- Creating an automation script -->
+        <h2>1. Creating a bash Script to Automate Container Updates</h2>
+        <ol type="1">
+            <li>In the /opt directory create a new file <em>update.sh</em> with the following code:
+                <pre>
+                    <code class="language-vim">
+                        #!/bin/bash
+                        apt update
+                        apt full-upgrade -y
+                        apt autoremove -y
 
+                        cd /opt/
+                        docker-compose pull
+                        docker-compose up -d
+                        docker image prune -af
+                        docker volume prune -f
+                    </code>
+                </pre>
+            </li>
+            <li>Update <em>update.sh</em> permissions to allow for execution:
+                <pre>
+                    <code class="language-bash">
+                        sudo chmod 755 update.sh
+                    </code>
+                </pre>
+            </li>
+            <li>To run <em>update.sh</em>:
+                <pre>
+                    <code class="language-bash">
+                        sudo ./update.sh
+                    </code>
+                </pre>
+            </li>
+        </ol>
+        <!-- Creating an automation script /-->
 
-</body>
+        <!-- Automatically running the update script -->
+        <h2>2. Setting the Update Script to Run Automatically</h2>
+        <ol type="1">
+            <li>Set up a new Cron Job on your Linux server:
+                <pre>
+                    <code class="language-bash">
+                        sudo crontab -e
+                    </code>
+                </pre>
+            </li>
+            <li>Add a schedule to the automation:
+                <ol type="a">
+                    <li>At the bottom of the file, add the following line:</li>
+                    <pre>
+                        <code class="language-bash">
+                            0 5 * * 6 /opt/update.sh
+                        </code>
+                    </pre>
+                    <ul>
+                        <li>
+                            This will run the <em>update.sh</em>
+                            script every Saturday at 5:00 am (at the 0th minute of the 5th hour of the 6th day of each week)
+                        </li>
+                    </ul>
+                </ol>
+
+            </li>
+        </ol>
+        <!-- Creating an automation script /-->
+
+    </body>
 </html>

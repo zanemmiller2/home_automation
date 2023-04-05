@@ -20,137 +20,137 @@
       <h1>Home Automation With Docker on Linux Setup</h1>
     </main>
     <script src="index.js"></script>
-  <!-- Assigning a static IP to linux computer section -->
-  <h2>1. Assign static IP address to Linux computer</h2>
-  <ol type="1">
-    <li>
-      To assign a "Reserved IP" address to Linux computer through Xfinity router
-      UI:
-    </li>
-    <ol type="a">
+    <!-- Assigning a static IP to linux computer section -->
+    <h2>1. Assign static IP address to Linux computer</h2>
+    <ol type="1">
       <li>
-        Navigate to your router admin site:
-        <a href="http://10.0.0.1"> http://10.0.0.1</a>
+        To assign a "Reserved IP" address to Linux computer through Xfinity router
+        UI:
       </li>
-      <ul>
-        <li>Username: admin</li>
-        <li>Password (Default): password</li>
-      </ul>
-      <li>Click "Connected Devices" in the left menu bar.</li>
-      <li>
-        Click "Edit" next to host name of the computer you want to assign a
-        reserved IP address to.
-      </li>
-      <li>Change "Configuration" to "Reserved IP".</li>
-      <li>"SAVE"</li>
+      <ol type="a">
+        <li>
+          Navigate to your router admin site:
+          <a href="http://10.0.0.1"> http://10.0.0.1</a>
+        </li>
+        <ul>
+          <li>Username: admin</li>
+          <li>Password (Default): password</li>
+        </ul>
+        <li>Click "Connected Devices" in the left menu bar.</li>
+        <li>
+          Click "Edit" next to host name of the computer you want to assign a
+          reserved IP address to.
+        </li>
+        <li>Change "Configuration" to "Reserved IP".</li>
+        <li>"SAVE"</li>
+      </ol>
     </ol>
-  </ol>
-  <!-- end: Assigning a static IP to linux computer section /-->
+    <!-- end: Assigning a static IP to linux computer section /-->
 
-  <!-- Installing Docker -->
-  <h2>2. Install Docker</h2>
-  <ol type="1">
-    <li>
-      <a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu</a>
-    </li>
-  </ol>
-  <!-- Installing Docker /-->
+    <!-- Installing Docker -->
+    <h2>2. Install Docker</h2>
+    <ol type="1">
+      <li>
+        <a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker Engine on Ubuntu</a>
+      </li>
+    </ol>
+    <!-- Installing Docker /-->
 
-  <!-- Manage Docker as a non-root user -->
-  <h2>3. Optional: Set up Docker to run as a non-root user</h2>
-  <ol type="1">
-    <li>
-      Create a Docker group if it does not already exist:
-      <pre>
+    <!-- Manage Docker as a non-root user -->
+    <h2>3. Optional: Set up Docker to run as a non-root user</h2>
+    <ol type="1">
+      <li>
+        Create a Docker group if it does not already exist:
+        <pre>
       <code class="language-bash">
         sudo groupadd docker
       </code>
     </pre>
-    </li>
-    <li>
-      Add your user account to that Docker group:
-      <pre>
+      </li>
+      <li>
+        Add your user account to that Docker group:
+        <pre>
       <code class="language-bash">
         sudo usermod -aG docker $USER
       </code>
     </pre>
-    </li>
-    <li>Logout and log back in for permission changes to take effect</li>
-    <li>
-      Verify you can run Docker without the sudo command:
-      <pre>
+      </li>
+      <li>Logout and log back in for permission changes to take effect</li>
+      <li>
+        Verify you can run Docker without the sudo command:
+        <pre>
       <code class="language-bash">
         docker run hello-world
       </code>
     </pre>
-      <ul>
-        <li>
-          You can also run the following command to activate changes to groups:
-          <pre>
+        <ol type="a">
+          <li>
+            You can also run the following command to activate changes to groups:
+            <pre>
             <code class="language-bash">
               newgrp docker
             </code>
           </pre>
-        </li>
-      </ul>
-    </li>
-  </ol>
-  <!-- Manage Docker as a non-root user /-->
+          </li>
+        </ol>
+      </li>
+    </ol>
+    <!-- Manage Docker as a non-root user /-->
 
-  <!-- Installing Docker Compose -->
-  <h2>4. Installing Docker Compose</h2>
-  <ol type="1">
-    <li>
-      Download the current, stable, release of Docker Compose:
-      <pre>
+    <!-- Installing Docker Compose -->
+    <h2>4. Installing Docker Compose</h2>
+    <ol type="1">
+      <li>
+        Download the current, stable, release of Docker Compose:
+        <pre>
         <code class="language-bash">
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         </code>
       </pre>
-    </li>
-    <li>
-      Set the permissions to allow you to run the downloaded files:
-      <pre>
+      </li>
+      <li>
+        Set the permissions to allow you to run the downloaded files:
+        <pre>
         <code class="language-bash">
           sudo chmod +x /usr/local/bin/docker-compose
         </code>
       </pre>
-    </li>
-    <li>
-      Test that Docker Composed is installed:
-      <pre>
+      </li>
+      <li>
+        Test that Docker Composed is installed:
+        <pre>
         <code class="language-bash">
           docker-compose --version
         </code>
       </pre>
-    </li>
-  </ol>
-  <!-- Installing Docker Compose /-->
+      </li>
+    </ol>
+    <!-- Installing Docker Compose /-->
 
-  <!-- Installing Portainer -->
-  <h2>5. Installing Portainer</h2>
-  <ol type="1">
-    <li>
-      Create a Docker Compose YAML file that contains the
-      information needed to create and start a container:
-      <ul>
-        <li>Navigate to the /opt directory
-          <pre>
+    <!-- Installing Portainer -->
+    <h2>5. Installing Portainer</h2>
+    <ol type="1">
+      <li>
+        Create a Docker Compose YAML file that contains the
+        information needed to create and start a container:
+        <ol type="a">
+          <li>Navigate to the /opt directory
+            <pre>
             <code class="language-bash">
               cd /opt            
             </code>
           </pre>
-        </li>
-        <li>Use your favorite text editor to create a new file called <em>docker-compose.yaml</em>
-          <pre>
+          </li>
+          <li>Use your favorite text editor to create a new file called <em>docker-compose.yaml</em>
+            <pre>
             <code class="language-bash">
               sudo vim docker-compose.yaml           
             </code>
           </pre>
-        </li>
-        <li>Use your favorite text editor to create a new file called <em>docker-compose.yaml</em>.
-          <strong>Note</strong> the <em>TZ</em> code. You may run into errors if your code does not match your system code.
-          <pre>
+          </li>
+          <li>Use your favorite text editor to create a new file called <em>docker-compose.yaml</em>.
+            <strong>Note</strong> the <em>TZ</em> code. You may run into errors if your code does not match your system code.
+            <pre>
             <code class="language-vim">
               version: '3.0'
               services:
@@ -167,40 +167,40 @@
                     - /opt/portainer:/data           
             </code>
           </pre>
-        </li>
-      </ul>
-    </li>
-    <li>
-      From the /opt directory we can now start Docker
-      (Note: this command needs to be run from the same
-      location you keep your <em>docker-compose.yaml</em> file):
-      <pre>
+          </li>
+        </ol>
+      </li>
+      <li>
+        From the /opt directory we can now start Docker
+        (Note: this command needs to be run from the same
+        location you keep your <em>docker-compose.yaml</em> file):
+        <pre>
         <code class="language-bash">
           docker-compose up -d          
         </code>
       </pre>
-    </li>
-    <li>
-      We can now navigate to the Portainer UI:
-      <pre>
+      </li>
+      <li>
+        We can now navigate to the Portainer UI:
+        <pre>
         <code class="language-url">
           https://&ltIPADDRESS&gt:9000/
         </code>
       </pre>
-    </li>
-  </ol>
-  <!-- Installing Portainer /-->
+      </li>
+    </ol>
+    <!-- Installing Portainer /-->
 
-  <!-- Installing Home Assistant Via Docker Compose -->
-  <h2>6. Installing Home Assistant via Docker Compose</h2>
-  <ol type="1">
-    <li>
-      Follow the instructions on the Home Assistant website to
-      <a href="https://www.home-assistant.io/installation/linux#docker-compose">
-        install Home Assitant Container</a>.
-      <ul>
-        <li>Update our <em>docker-compose.yaml</em> file with the following configurations.
-          <pre>
+    <!-- Installing Home Assistant Via Docker Compose -->
+    <h2>6. Installing Home Assistant via Docker Compose</h2>
+    <ol type="1">
+      <li>
+        Follow the instructions on the Home Assistant website to
+        <a href="https://www.home-assistant.io/installation/linux#docker-compose">
+          install Home Assitant Container</a>.
+        <ol type="a">
+          <li>Update our <em>docker-compose.yaml</em> file with the following configurations.
+            <pre>
             <code class="language-vim">
               homeassistant:
                   container_name: homeassistant
@@ -213,54 +213,54 @@
                   network_mode: host         
             </code>
           </pre>
-        </li>
-        <li>Save</li>
-        <li>Re-run the following command to create the Home Assistant container:
-          <pre>
+          </li>
+          <li>Save</li>
+          <li>Re-run the following command to create the Home Assistant container:
+            <pre>
             <code class="language-bash">
               docker-compose up -d     
             </code>
           </pre>
-        </li>
-      </ul>
-    </li>
-    <li>You should be able to see the newly created Home Assistant container listed in your Portainer UI</li>
-    <img src="/images/step6_homeassistant.png" class="padding">
-    <li>We can now navigate to the Home Assistant UI on port 8123:
-      <pre>
+          </li>
+        </ol>
+      </li>
+      <li>You should be able to see the newly created Home Assistant container listed in your Portainer UI</li>
+      <img src="/images/step6_homeassistant.png" class="padding">
+      <li>We can now navigate to the Home Assistant UI on port 8123:
+        <pre>
         <code class="language-url">
           http://&ltIPADDRESS&gt:8123/       
         </code>
       </pre>
-    </li>
-  </ol>
-  <!-- Installing Home Assistant Via Docker Compose /-->
+      </li>
+    </ol>
+    <!-- Installing Home Assistant Via Docker Compose /-->
 
 
-  <!-- Managing Your Docker Containers from within Home Assistant -->
-  <h2>7. Managing Docker Containers from within Home Assistant</h2>
-  <ol type="1">
-    <li>
-      Edit the Home Assistant configuration file:
-      <ul>
-        <li>Navigate to the Home Assistant config directory
-          <pre>
+    <!-- Managing Your Docker Containers from within Home Assistant -->
+    <h2>7. Managing Docker Containers from within Home Assistant</h2>
+    <ol type="1">
+      <li>
+        Edit the Home Assistant configuration file:
+        <ol type="a">
+          <li>Navigate to the Home Assistant config directory
+            <pre>
             <code class="language-bash">
               cd /opt/homeassistant/config      
             </code>
           </pre>
-        </li>
-        <li>
-          Edit the Home Assistant configuration file using your favorite text editor:
-          <pre>
+          </li>
+          <li>
+            Edit the Home Assistant configuration file using your favorite text editor:
+            <pre>
             <code class="language-bash">
               sudo vim configuration.yaml      
             </code>
           </pre>
-        </li>
-        <li>
-          Add the following configuration to the top of you <em>configuration.yaml</em> to add Portainer to your Home Assistant navigation menu:
-          <pre>
+          </li>
+          <li>
+            Add the following configuration to the top of you <em>configuration.yaml</em> to add Portainer to your Home Assistant navigation menu:
+            <pre>
             <code class="language-vim">
               panel_iframe:
                 portainer:
@@ -270,23 +270,23 @@
                   require_admin: true     
             </code>
           </pre>
-        </li>
-        <li>Save</li>
-      </ul>
-    </li>
-    <li>Restart Home Assistant
-      <ul>
-        <li>
-          Click <em>Developer Tools</em> from the left side menu
-        </li>
-        <li>
-          Under <em>Check and Restart</em> Click <em>Restart</em>
-        </li>
-      </ul>
-    </li>
-    <li>You should be able to see a new Portainer item in the left navigation menu in Home Assistant</li>
-    <img src="/images/portainer_in_home_assistant.png" class="padding">
-  </ol>
-  <!-- Managing Your Docker Containers From within Home Assistant /-->
+          </li>
+          <li>Save</li>
+        </ol>
+      </li>
+      <li>Restart Home Assistant
+        <ol type="a">
+          <li>
+            Click <em>Developer Tools</em> from the left side menu
+          </li>
+          <li>
+            Under <em>Check and Restart</em> Click <em>Restart</em>
+          </li>
+        </ol>
+      </li>
+      <li>You should be able to see a new Portainer item in the left navigation menu in Home Assistant</li>
+      <img src="/images/portainer_in_home_assistant.png" class="padding">
+    </ol>
+    <!-- Managing Your Docker Containers From within Home Assistant /-->
   </body>
 </html>
